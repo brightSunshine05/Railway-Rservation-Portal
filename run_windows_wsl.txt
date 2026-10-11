@@ -1,0 +1,39 @@
+HOW TO RUN ON WINDOWS (using WSL)
+=================================
+
+1. Install WSL (once). Open PowerShell as Administrator:
+       wsl --install
+   Restart the PC if asked, open "Ubuntu" from the Start menu, create a username/password.
+
+2. Install the compiler (inside Ubuntu):
+       sudo apt update
+       sudo apt install -y build-essential
+
+3. Unzip the project and copy it into WSL. Example if it is in C:\Users\<you>\Downloads:
+       cd ~
+       cp -r /mnt/c/Users/<you>/Downloads/Railway_Reservation_OS_Project .
+       cd Railway_Reservation_OS_Project
+
+4. Compile:
+       gcc main.c -o railway -pthread
+
+5. Start the websites (keep this terminal open):
+       ./railway serve
+
+6. On Windows, open a browser (Chrome / Edge) and visit:
+       http://localhost:8080/              Railway Portal (main website)
+       http://localhost:8080/makemytrip    MakeMyTrip (partner website)
+       http://localhost:8080/goibibo       Goibibo (partner website)
+   Book on MakeMyTrip or Goibibo, then open the main site -> "All Bookings" tab.
+   (If localhost does not open, run  hostname -I  in Ubuntu and use that address with :8080.)
+
+7. Console demos (stop the server with Ctrl+C first, or use --port 8081 for the server):
+       ./railway simulate              safe mode: 0 double bookings
+       ./railway simulate --unsafe     race-condition demo: double bookings appear
+
+NOTES
+- Always run ./railway from inside the project folder (it serves the web/ folder).
+- Do NOT compile with plain Windows MinGW: the program uses POSIX threads/semaphores/sockets.
+- "undefined reference to pthread_create" means the -pthread flag is missing.
+- "bind/listen: Address already in use": use  ./railway serve --port 8090  and open that port.
+- Unsafe-mode numbers change every run because race conditions depend on thread timing.

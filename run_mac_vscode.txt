@@ -1,0 +1,49 @@
+HOW TO RUN ON macOS WITH VS CODE
+================================
+
+ONE-TIME SETUP
+1. Install the compiler (Apple's command line tools). Open the Terminal app and run:
+       xcode-select --install
+   Click "Install" in the pop-up and wait. This gives you  gcc  (it is Apple's clang)  and  make.
+   Check it worked:   gcc --version
+
+2. Install VS Code from https://code.visualstudio.com  (drag it to Applications).
+
+3. In VS Code open the Extensions tab (Cmd+Shift+X) and install "C/C++" by Microsoft
+   (gives colours, error hints and IntelliSense).
+
+OPEN THE PROJECT
+4. Unzip Railway_Reservation_OS_Project_v3.zip (double-click it in Finder).
+5. In VS Code:  File > Open Folder...  and choose the Railway_Reservation_OS_Project folder.
+   Click "Yes, I trust the authors" if asked.
+
+BUILD AND RUN (easy way: built-in tasks)
+6. Press  Cmd+Shift+B  -> builds the program (runs  gcc main.c -o railway -pthread).
+7. Terminal menu > Run Task... > "Run websites (serve)".
+   The terminal shows the three website addresses. Keep it running.
+8. Open Safari or Chrome and visit:
+       http://localhost:8080/              Railway Portal (main website)
+       http://localhost:8080/makemytrip    MakeMyTrip (partner website)
+       http://localhost:8080/goibibo       Goibibo (partner website)
+9. Book on MakeMyTrip or Goibibo, then open the main site and click "All Bookings".
+10. Stop the server with Ctrl+C in the VS Code terminal.
+
+BUILD AND RUN (manual way, in the VS Code terminal: Terminal > New Terminal, or Ctrl+`)
+       gcc -Wall -Wextra -O2 main.c -o railway -pthread
+       ./railway serve                 websites
+       ./railway simulate              console test (safe: 0 double bookings)
+       ./railway simulate --unsafe     console race-condition demo (double bookings appear)
+
+Other tasks in Terminal > Run Task...:
+       "Run console simulation (safe)"  and  "Run console simulation (unsafe race demo)"
+
+TROUBLESHOOTING
+- "gcc: command not found"  -> run  xcode-select --install  again and wait for it to finish.
+- "Address already in use"  -> another program uses port 8080. Run  ./railway serve --port 8090
+  and open http://localhost:8090/ instead.
+- A pop-up "Do you want the application railway to accept incoming network connections?"
+  -> click Allow (or Deny; the websites still work on localhost).
+- "zsh: permission denied: ./railway"  -> run  chmod +x railway  and try again.
+- Browser shows "This site can't be reached" -> the server is not running; check the terminal.
+- Always run ./railway from inside the project folder (it serves the web/ folder).
+- Works on Intel and Apple Silicon (M1/M2/M3) Macs.

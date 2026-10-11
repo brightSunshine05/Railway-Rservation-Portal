@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Railway Portal - Main Website</title><link rel="stylesheet" href="/style.css"></head>
+<body data-theme="main">
+<header class="site"><div class="wrap"><div class="brand">&#128646; Railway Portal <small>Main website</small></div><nav class="sites" id="nav"></nav></div></header>
+<div class="wrap">
+  <div class="train"><span><b>Search any train</b>: choose starting station, destination and date</span><span>15 stations &middot; 18 trains &middot; 1AC / 2AC / 3AC</span><span>Seat-wise meal ordering at booking</span></div>
+  <div class="tabs" id="tabs">
+    <button data-tab="book" class="on">Book Ticket</button><button data-tab="cancel">Cancel / Refund</button>
+    <button data-tab="bookings">All Bookings (all websites)</button><button data-tab="avail">Seat Availability</button>
+    <button data-tab="meals">Meals (Pantry)</button><button data-tab="log">Activity Log</button><button data-tab="demo">Priority Demo</button>
+  </div>
+  <section class="tab on" id="tab-book"><div id="m-book"></div></section>
+  <section class="tab" id="tab-cancel"><div id="m-cancel"></div></section>
+  <section class="tab" id="tab-bookings"><div id="m-bookings"></div></section>
+  <section class="tab" id="tab-avail"><div id="m-avail"></div></section>
+  <section class="tab" id="tab-meals"><div id="m-meals"></div></section>
+  <section class="tab" id="tab-log"><div id="m-log"></div></section>
+  <section class="tab" id="tab-demo"><div id="m-demo"></div></section>
+</div>
+<footer>OS Synchronization Project &middot; Railway Reservation System &middot; every booking, from any website, is stored here</footer>
+<script>window.SITE={channel:"DIRECT",key:"",name:"Railway Portal",discount:0};</script>
+<script src="/common.js"></script>
+<script>
+  document.getElementById("nav").innerHTML = header("DIRECT"); initTabs();
+  mountBooking(document.getElementById("m-book")); mountCancel(document.getElementById("m-cancel"));
+  mountBookings(document.getElementById("m-bookings"), ""); mountAvailability(document.getElementById("m-avail"));
+  mountMeals(document.getElementById("m-meals")); mountLog(document.getElementById("m-log")); mountDemo(document.getElementById("m-demo"));
+</script></body></html>

@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Goibibo - Train Tickets (partner website)</title><link rel="stylesheet" href="/style.css"></head>
+<body data-theme="goi">
+<header class="site"><div class="wrap"><div class="brand">Goibibo <small>Partner website &middot; train tickets</small></div><nav class="sites" id="nav"></nav></div></header>
+<div class="offer">Exclusive offer: 12% OFF on railway tickets booked on Goibibo &middot; Priority confirmation</div>
+<div class="wrap">
+  <div class="train"><span><b>Search any train</b>: choose starting station, destination and date</span><span>Seat-wise meal ordering at booking</span><span>Powered by the Railway Portal booking engine</span></div>
+  <div class="tabs" id="tabs">
+    <button data-tab="book" class="on">Book Ticket</button><button data-tab="cancel">Cancel / Refund</button>
+    <button data-tab="bookings">My Bookings</button><button data-tab="avail">Seat Availability</button>
+  </div>
+  <section class="tab on" id="tab-book"><div id="m-book"></div></section>
+  <section class="tab" id="tab-cancel"><div id="m-cancel"></div></section>
+  <section class="tab" id="tab-bookings"><div id="m-bookings"></div></section>
+  <section class="tab" id="tab-avail"><div id="m-avail"></div></section>
+</div>
+<footer>Goibibo (simulated partner site for the OS project). Bookings made here are sent to the Railway Portal with a partner API key and appear on the main website instantly.</footer>
+<script>window.SITE={channel:"GOI",key:"GOI-KEY-2026",name:"Goibibo",discount:12};</script>
+<script src="/common.js"></script>
+<script>
+  document.getElementById("nav").innerHTML = header("GOI"); initTabs();
+  mountBooking(document.getElementById("m-book")); mountCancel(document.getElementById("m-cancel"));
+  mountBookings(document.getElementById("m-bookings"), "GOI"); mountAvailability(document.getElementById("m-avail"));
+</script></body></html>
